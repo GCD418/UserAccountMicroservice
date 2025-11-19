@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\UserAccountMicroservice.Application\UserAccountMicroservice.Application.csproj" />
+      <ProjectReference Include="..\UserAccountMicroservice.Infrastructure\UserAccountMicroservice.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
