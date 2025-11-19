@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAccountMicroservice.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAccountMicroservice.Domain", "UserAccountMicroservice.Domain\UserAccountMicroservice.Domain.csproj", "{5146C121-53AA-4CC3-991F-3BA3456C109B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAccountMIcroservice.Infrastructure", "UserAccountMIcroservice.Infrastructure\UserAccountMIcroservice.Infrastructure.csproj", "{72A16C41-090E-4EB3-87E3-53297942E3E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAccountMicroservice.Infrastructure", "UserAccountMicroservice.Infrastructure\UserAccountMicroservice.Infrastructure.csproj", "{72A16C41-090E-4EB3-87E3-53297942E3E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
