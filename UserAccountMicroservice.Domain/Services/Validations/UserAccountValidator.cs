@@ -3,7 +3,7 @@ using UserAccountMicroservice.Domain.Entities;
 
 namespace UserAccountMicroservice.Domain.Services.Validations;
 
-public class UserAccountValidator
+public class UserAccountValidator : IValidator<UserAccount>
 {
     private readonly List<string> _errors = [];
 

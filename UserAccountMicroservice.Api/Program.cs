@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using UserAccountMicroservice.Application.Facades;
 using UserAccountMicroservice.Application.Services;
+using UserAccountMicroservice.Domain.DTOs;
+using UserAccountMicroservice.Domain.Entities;
 using UserAccountMicroservice.Domain.Ports;
 using UserAccountMicroservice.Domain.Services;
+using UserAccountMicroservice.Domain.Services.Validations;
 using UserAccountMicroservice.Infrastructure.Connection;
 using UserAccountMicroservice.Infrastructure.Persistence;
 using UserAccountMicroservice.Infrastructure.Security;
@@ -24,7 +27,7 @@ builder.Services.AddScoped<IDbConnectionFactory, PostgreSqlConnection>();
 
 builder.Services.AddScoped<UserAccountService>();
 builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
-// builder.Services.AddScoped<IValidator<UserAccount>, UserAccountValidator>();
+builder.Services.AddScoped<IValidator<UserAccount>, UserAccountValidator>();
 
 #endregion
 
