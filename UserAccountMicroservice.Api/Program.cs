@@ -1,7 +1,13 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using UserAccountMicroservice.Application.Facades;
 using UserAccountMicroservice.Application.Services;
 using UserAccountMicroservice.Domain.Ports;
+using UserAccountMicroservice.Domain.Services;
 using UserAccountMicroservice.Infrastructure.Connection;
 using UserAccountMicroservice.Infrastructure.Persistence;
+using UserAccountMicroservice.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +28,38 @@ builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
 
 #endregion
 
+#region Authentication
+
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<AuthFacade>();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings["SecretKey"];
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!))
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+#endregion
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -36,6 +74,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
