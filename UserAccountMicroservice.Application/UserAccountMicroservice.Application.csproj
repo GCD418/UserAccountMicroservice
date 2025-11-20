@@ -10,4 +10,8 @@
       <ProjectReference Include="..\UserAccountMicroservice.Domain\UserAccountMicroservice.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Facades\" />
+    </ItemGroup>
+
 </Project>
