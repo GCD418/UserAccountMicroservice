@@ -43,9 +43,9 @@ public class UserAccountsController : ControllerBase
     }
 
     [HttpPut()]
-    public async Task<IActionResult> Update([FromBody] UserAccount account, [FromHeader] int id)
+    public async Task<IActionResult> Update([FromBody] UserAccount account, [FromHeader] int userId)
     {
-        var success = await _service.Update(account, id);
+        var success = await _service.Update(account, userId);
         if (!success)
             return  NotFound();
         return Ok();
