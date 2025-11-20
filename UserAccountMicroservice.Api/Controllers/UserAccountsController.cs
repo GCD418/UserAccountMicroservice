@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserAccountMicroservice.Api.DTOs;
+using UserAccountMicroservice.Application.Facades;
 using UserAccountMicroservice.Application.Services;
 using UserAccountMicroservice.Domain.Entities;
 using UserAccountMicroservice.Domain.Services.Validations;
@@ -13,11 +14,13 @@ public class UserAccountsController : ControllerBase
 {
     private readonly UserAccountService _service;
     private readonly IValidator<UserAccount> _validator;
+    private readonly AuthFacade _authFacade;
 
-    public UserAccountsController(UserAccountService service, IValidator<UserAccount> validator)
+    public UserAccountsController(UserAccountService service, IValidator<UserAccount> validator, AuthFacade authFacade)
     {
         _service = service;
         _validator = validator;
+        _authFacade = authFacade;
     }
 
     [Authorize(Roles = "CEO")]
@@ -55,7 +58,7 @@ public class UserAccountsController : ControllerBase
             });
         }
 
-        var success = await _service.Create(account);
+        var success = await _authFacade.Create(account);
         
         if (!success)
         {

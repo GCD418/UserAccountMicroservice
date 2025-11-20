@@ -31,6 +31,12 @@ builder.Services.AddScoped<IValidator<UserAccount>, UserAccountValidator>();
 
 #endregion
 
+#region Email
+
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IMailSender, SmtpEmailSender>();
+
+#endregion
 #region Authentication
 
 builder.Services.AddScoped<IPasswordService, PasswordService>();
