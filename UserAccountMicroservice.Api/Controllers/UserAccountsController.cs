@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserAccountMicroservice.Application.Services;
 using UserAccountMicroservice.Domain.Entities;
@@ -22,6 +23,7 @@ public class UserAccountsController : ControllerBase
         return Ok(accounts);
     }
 
+    [Authorize(Roles = "CEO,Manager")]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
