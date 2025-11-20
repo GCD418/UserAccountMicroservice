@@ -20,6 +20,7 @@ public class UserAccountsController : ControllerBase
         _validator = validator;
     }
 
+    [Authorize(Roles = "CEO")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -27,7 +28,7 @@ public class UserAccountsController : ControllerBase
         return Ok(accounts);
     }
 
-    [Authorize(Roles = "CEO,Manager")]
+    [Authorize(Roles = "CEO")]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -37,6 +38,7 @@ public class UserAccountsController : ControllerBase
         return Ok(account);
     }
 
+    [Authorize(Roles = "CEO")]
     [HttpPost("create")]
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
@@ -67,6 +69,7 @@ public class UserAccountsController : ControllerBase
         });
     }
 
+    [Authorize(Roles = "CEO")]
     [HttpPut()]
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
@@ -104,6 +107,7 @@ public class UserAccountsController : ControllerBase
         });
     }
 
+    [Authorize(Roles = "CEO")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteById(int id, [FromHeader] int userId)
     {
