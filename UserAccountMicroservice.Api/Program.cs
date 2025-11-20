@@ -8,6 +8,7 @@ using UserAccountMicroservice.Domain.Entities;
 using UserAccountMicroservice.Domain.Ports;
 using UserAccountMicroservice.Domain.Services;
 using UserAccountMicroservice.Domain.Services.Validations;
+using UserAccountMicroservice.Infrastructure;
 using UserAccountMicroservice.Infrastructure.Connection;
 using UserAccountMicroservice.Infrastructure.Persistence;
 using UserAccountMicroservice.Infrastructure.Security;

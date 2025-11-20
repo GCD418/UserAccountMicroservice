@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Options;
 using UserAccountMicroservice.Domain.Ports;
 
 namespace UserAccountMicroservice.Infrastructure;
