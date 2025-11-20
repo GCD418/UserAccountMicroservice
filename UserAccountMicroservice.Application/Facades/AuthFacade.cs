@@ -27,7 +27,6 @@ public class AuthFacade
 
     public async Task<LoginResponse?> Login(LoginRequest request)
     {
-        // Buscar usuario por nombre de usuario
         UserAccount? userAccount = await _userAccountService.GetByUserName(request.UserName);
         
         if (userAccount == null || !VerifyCredentials(userAccount, request.Password))
@@ -35,14 +34,13 @@ public class AuthFacade
             return null;
         }
 
-        // Generar token JWT
         var token = _jwtService.GenerateToken(userAccount);
         var expirationMinutes = int.Parse(_configuration.GetSection("JwtSettings")["ExpirationInMinutes"] ?? "60");
 
         return new LoginResponse
         {
             Token = token,
-            ExpiresIn = expirationMinutes * 60, // En segundos
+            ExpiresIn = expirationMinutes * 60, 
             UserName = userAccount.UserName,
             Role = userAccount.Role,
             FullName = userAccount.FullName
