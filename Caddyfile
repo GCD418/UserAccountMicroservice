@@ -1,0 +1,8 @@
+# Caddyfile
+
+# Bloque para la API
+:80 {
+    # Redirige todo el tráfico que llega a la raíz hacia el contenedor de la API
+    # "user-account-api" es el nombre del servicio que definiremos en el docker-compose
+    reverse_proxy user-account-api:8080
+}

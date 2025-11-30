@@ -1,0 +1,27 @@
+services:
+  # Tu Microservicio .NET
+  user-account-api:
+    build:
+      context: .
+      dockerfile: UserAccountMicroservice.Api/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    restart: always
+
+  # El Proxy Caddy
+  caddy:
+    image: docker.io/caddy:latest
+    restart: always
+    ports:
+      - "80:80"    # Exponemos el puerto 80 de la VM/PC al 80 del contenedor
+      # - "443:443" # Descomenta esto cuando uses HTTPS en producción
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile  # Mapeamos tu archivo local al contenedor
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - user-account-api
+
+volumes:
+  caddy_data:
+  caddy_config:
