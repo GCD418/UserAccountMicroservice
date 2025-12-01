@@ -45,7 +45,7 @@ public class UserAccountsController : ControllerBase
     [HttpPost("create")]
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] UserAccount account)
+    public async Task<IActionResult> Create([FromBody] UserAccount account, [FromHeader] int userId)
     {
         var validationResult = _validator.Validate(account);
         
@@ -58,7 +58,7 @@ public class UserAccountsController : ControllerBase
             });
         }
 
-        var success = await _authFacade.Create(account);
+        var success = await _authFacade.Create(account, userId);
         
         if (!success)
         {

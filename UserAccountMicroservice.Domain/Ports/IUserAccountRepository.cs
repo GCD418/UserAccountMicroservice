@@ -9,7 +9,7 @@ public interface IUserAccountRepository
     
     public Task<UserAccount> GetByIdAsync(int id);
     
-    public Task<bool> CreateAsync(UserAccount userAccount);
+    public Task<bool> CreateAsync(UserAccount userAccount, int userId);
     
     public Task<bool> UpdateAsync(UserAccount userAccount, int userId);
     

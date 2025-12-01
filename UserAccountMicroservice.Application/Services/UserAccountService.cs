@@ -22,9 +22,9 @@ public class UserAccountService
         return await _repository.GetByIdAsync(id);
     }
 
-    public async Task<bool> Create(UserAccount userAccount)
+    public async Task<bool> Create(UserAccount userAccount, int userId)
     {
-        return await _repository.CreateAsync(userAccount);
+        return await _repository.CreateAsync(userAccount, userId);
     }
 
     public async Task<bool> Update(UserAccount userAccount, int userId)

@@ -28,7 +28,7 @@ public class UserAccountRepository : IUserAccountRepository
         return await connection.QuerySingleOrDefaultAsync<UserAccount>(query, new { id });
     }
 
-    public async Task<bool> CreateAsync(UserAccount userAccount)
+    public async Task<bool> CreateAsync(UserAccount userAccount, int userId)
     {
         await using var connection = _dbConnectionFactory.CreateConnection();
         string query = "SELECT fn_insert_account(@name, @first_last_name, @second_last_name, @phone_number, @email, @document_number, @document_extension, @user_name, @password, @role, @created_by_user_id)";
@@ -44,7 +44,7 @@ public class UserAccountRepository : IUserAccountRepository
             user_name = userAccount.UserName,
             password = userAccount.Password,
             role = userAccount.Role,
-            created_by_user_id = userAccount.ModifiedByUserId
+            created_by_user_id = userId
         };
         var newId = await connection.ExecuteScalarAsync<int>(query, parameters);
         return newId > 0;

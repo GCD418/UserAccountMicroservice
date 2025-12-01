@@ -28,7 +28,7 @@ public class AuthFacade
         _mailSender = mailSender;
     }
     
-    public async Task<bool> Create(UserAccount userAccount)
+    public async Task<bool> Create(UserAccount userAccount, int userId)
     {
         userAccount.UserName = _userAccountService.GenerateUserName(userAccount);
         if (await _userAccountService.IsUserNameUsed(userAccount.UserName))
@@ -41,7 +41,7 @@ public class AuthFacade
         
         await SendEmail(userAccount.Name, userAccount.UserName, userAccount.Email, password);
 
-        return await _userAccountService.Create(userAccount);
+        return await _userAccountService.Create(userAccount, userId);
 
     }
 
