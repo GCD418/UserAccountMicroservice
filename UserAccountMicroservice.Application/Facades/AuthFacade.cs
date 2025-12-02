@@ -63,7 +63,8 @@ public class AuthFacade
             ExpiresIn = expirationMinutes * 60, 
             UserName = userAccount.UserName,
             Role = userAccount.Role,
-            FullName = userAccount.FullName
+            FullName = userAccount.FullName,
+            IsFirstLogin = userAccount.IsFirstLogin
         };
     }
 
