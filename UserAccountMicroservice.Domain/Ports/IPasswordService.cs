@@ -1,4 +1,4 @@
-namespace UserAccountMicroservice.Domain.Ports;
+﻿namespace UserAccountMicroservice.Domain.Ports;
 
 public interface IPasswordService
 {
@@ -6,5 +6,5 @@ public interface IPasswordService
     
     bool VerifyPassword(string password, string hashedPassword);
     
-    string GenerateRandomPassword(int length = 8);
+    string GenerateRandomPassword(int length = 5);
 }
